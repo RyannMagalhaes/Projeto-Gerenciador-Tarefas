@@ -19,8 +19,9 @@
 
 ### ✔ Funcionalidades
 
-  - [x] Cadastrar tarefa
-  - [x] Excluir tarefa
+  - [] Cadastrar tarefa/tarefa coletiva
+  - [] Excluir tarefas
+  - [] Editar tarefas
  
 
 ### 🛠 Tecnologias
