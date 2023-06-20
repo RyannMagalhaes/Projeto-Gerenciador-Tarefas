@@ -17,5 +17,20 @@
     - Segurança com Spring Security e JWT
     - Documentação com OpenAPI 3 e Swagger;
 
+### ✔ Funcionalidades
+
+  - [x] Cadastrar tarefa
+  - [x] Excluir tarefa
+ 
+
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- Java
+-
+-
+-
+
 
 
