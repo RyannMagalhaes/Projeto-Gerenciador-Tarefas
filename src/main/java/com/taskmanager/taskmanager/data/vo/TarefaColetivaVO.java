@@ -1,11 +1,12 @@
 package com.taskmanager.taskmanager.data.vo;
 
 import jakarta.persistence.Column;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class TarefaColetivaVO implements Serializable {
+public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> implements Serializable {
 
     private Long cod_tarefa_col;
 

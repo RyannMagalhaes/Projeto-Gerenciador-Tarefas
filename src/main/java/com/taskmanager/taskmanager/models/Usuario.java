@@ -18,4 +18,27 @@ public class Usuario implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
+    public long getCod_user() {
+        return cod_user;
+    }
+
+    public void setCod_user(long cod_user) {
+        this.cod_user = cod_user;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

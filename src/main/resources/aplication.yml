@@ -12,5 +12,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
     show-sql: true
+  springdoc:
+    paths-to-match:
+      - /api/**/v1/**
+    swagger-ui:
+      use-root-path: true
 
 minha_senha: 1234

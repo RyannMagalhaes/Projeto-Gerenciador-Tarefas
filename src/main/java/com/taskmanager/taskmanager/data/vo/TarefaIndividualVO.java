@@ -1,14 +1,16 @@
 package com.taskmanager.taskmanager.data.vo;
 
 import jakarta.persistence.Column;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class TarefaIndividualVO implements Serializable {
+public class TarefaIndividualVO extends RepresentationModel<TarefaIndividualVO> implements Serializable {
 
     private Long cod_tarefa_ind;
 
+    private String nome;
     private String descricao;
 
     private String categoria;
@@ -21,8 +23,9 @@ public class TarefaIndividualVO implements Serializable {
 
     private int prioriadade;
 
-    public TarefaIndividualVO(Long cod_tarefa_ind, String descricao, String categoria, boolean status, Date data_inicio, Date data_fim, int prioriadade) {
+    public TarefaIndividualVO(Long cod_tarefa_ind, String nome, String descricao, String categoria, boolean status, Date data_inicio, Date data_fim, int prioriadade) {
         this.cod_tarefa_ind = cod_tarefa_ind;
+        this.nome = nome;
         this.descricao = descricao;
         this.categoria = categoria;
         this.status = status;
@@ -30,7 +33,16 @@ public class TarefaIndividualVO implements Serializable {
         this.data_fim = data_fim;
         this.prioriadade = prioriadade;
     }
+
     public TarefaIndividualVO() {
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Long getCod_tarefa_ind() {
@@ -93,12 +105,14 @@ public class TarefaIndividualVO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         TarefaIndividualVO that = (TarefaIndividualVO) o;
 
         if (status != that.status) return false;
         if (prioriadade != that.prioriadade) return false;
         if (!cod_tarefa_ind.equals(that.cod_tarefa_ind)) return false;
+        if (!nome.equals(that.nome)) return false;
         if (!descricao.equals(that.descricao)) return false;
         if (!categoria.equals(that.categoria)) return false;
         if (!data_inicio.equals(that.data_inicio)) return false;
@@ -107,7 +121,9 @@ public class TarefaIndividualVO implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = cod_tarefa_ind.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + cod_tarefa_ind.hashCode();
+        result = 31 * result + nome.hashCode();
         result = 31 * result + descricao.hashCode();
         result = 31 * result + categoria.hashCode();
         result = 31 * result + (status ? 1 : 0);
@@ -121,6 +137,7 @@ public class TarefaIndividualVO implements Serializable {
     public String toString() {
         return "TarefaIndividualVO{" +
                 "cod_tarefa_ind=" + cod_tarefa_ind +
+                ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", status=" + status +

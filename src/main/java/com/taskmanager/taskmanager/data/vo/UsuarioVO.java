@@ -1,9 +1,11 @@
 package com.taskmanager.taskmanager.data.vo;
 
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 
-public class UsuarioVO implements Serializable {
+public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Serializable {
 
     private long cod_user;
 
