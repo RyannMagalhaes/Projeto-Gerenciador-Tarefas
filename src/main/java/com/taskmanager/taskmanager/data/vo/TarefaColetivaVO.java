@@ -9,6 +9,7 @@ import java.util.Date;
 public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> implements Serializable {
 
     private Long cod_tarefa_col;
+    private String nome;
 
     private String descricao;
 
@@ -22,8 +23,9 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
 
     private int prioriadade;
 
-    public TarefaColetivaVO(Long cod_tarefa_col, String descricao, String categoria, boolean status, Date data_inicio, Date data_fim, int prioriadade) {
+    public TarefaColetivaVO(Long cod_tarefa_col, String nome, String descricao, String categoria, boolean status, Date data_inicio, Date data_fim, int prioriadade) {
         this.cod_tarefa_col = cod_tarefa_col;
+        this.nome = nome;
         this.descricao = descricao;
         this.categoria = categoria;
         this.status = status;
@@ -31,6 +33,7 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
         this.data_fim = data_fim;
         this.prioriadade = prioriadade;
     }
+
     public TarefaColetivaVO() {
     }
 
@@ -40,6 +43,14 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
 
     public void setCod_tarefa_col(Long cod_tarefa_col) {
         this.cod_tarefa_col = cod_tarefa_col;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {

@@ -12,6 +12,8 @@ public class TarefaColetiva implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cod_tarefa_col;
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
     @Column(name = "descricao", nullable = false)
     private String descricao;
@@ -85,5 +87,13 @@ public class TarefaColetiva implements Serializable {
 
     public void setPrioriadade(int prioriadade) {
         this.prioriadade = prioriadade;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

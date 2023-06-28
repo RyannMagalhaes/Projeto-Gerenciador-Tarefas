@@ -13,3 +13,4 @@ public class TaskmanagerApplication {
 	}
 
 }
+// http://localhost:8080/swagger-ui/index.html#/Usuario/findById endpoint para swagger
