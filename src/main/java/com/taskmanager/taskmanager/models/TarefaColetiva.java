@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tarefa_col_table")
@@ -12,6 +13,7 @@ public class TarefaColetiva implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cod_tarefa_col;
+
     @Column(name = "nome", nullable = false)
     private String nome;
 
@@ -31,7 +33,12 @@ public class TarefaColetiva implements Serializable {
     private Date data_fim;
 
     @Column(name = "prioridade", nullable = false)
-    private int prioriadade;
+    private int prioridade;
+
+    @ElementCollection
+    @CollectionTable(name = "participantes_table", joinColumns = @JoinColumn(name = "cod_tarefa_col"))
+    @Column(name = "participante_id")
+    private List<Long> idsParticipantes;
 
     public Long getCod_tarefa_col() {
         return cod_tarefa_col;
@@ -39,6 +46,14 @@ public class TarefaColetiva implements Serializable {
 
     public void setCod_tarefa_col(Long cod_tarefa_col) {
         this.cod_tarefa_col = cod_tarefa_col;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -81,19 +96,19 @@ public class TarefaColetiva implements Serializable {
         this.data_fim = data_fim;
     }
 
-    public int getPrioriadade() {
-        return prioriadade;
+    public int getPrioridade() {
+        return prioridade;
     }
 
-    public void setPrioriadade(int prioriadade) {
-        this.prioriadade = prioriadade;
+    public void setPrioridade(int prioridade) {
+        this.prioridade = prioridade;
     }
 
-    public String getNome() {
-        return nome;
+    public List<Long> getIdsParticipantes() {
+        return idsParticipantes;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setIdsParticipantes(List<Long> idsParticipantes) {
+        this.idsParticipantes = idsParticipantes;
     }
 }

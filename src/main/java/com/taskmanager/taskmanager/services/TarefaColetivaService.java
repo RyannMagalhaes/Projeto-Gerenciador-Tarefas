@@ -35,13 +35,17 @@ public class TarefaColetivaService {
             throw new RequiredObjectIsNullException();
         }
 
+        Long id = tarefaColetivaVO.getCod_tarefa_col(); //
+
+        if (verificarIdExistente(id)) {
+            throw new Exception("ID already exists.");
+        }
 
         TarefaColetiva tarefaColetiva = DozerMapper.parseObject(tarefaColetivaVO, TarefaColetiva.class);
         TarefaColetiva tarefaColetivaDB = repository.save(tarefaColetiva);
         TarefaColetivaVO savedTarefaCol = DozerMapper.parseObject(tarefaColetivaDB, TarefaColetivaVO.class);
         savedTarefaCol.add(linkTo(methodOn(TarefaColetivaController.class).findById(savedTarefaCol.getCod_tarefa_col())).withSelfRel());
         return savedTarefaCol;
-
     }
 
     public TarefaColetivaVO update(TarefaColetivaVO tarefaColetivaVO) throws Exception {
@@ -59,5 +63,9 @@ public class TarefaColetivaService {
         var dbTarefaCol = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
         repository.deleteById(id);
         return "Tarefa Coletiva with id " + id + " has been deleted!";
+    }
+
+    public boolean verificarIdExistente(Long id) {
+        return repository.existsById(id);
     }
 }

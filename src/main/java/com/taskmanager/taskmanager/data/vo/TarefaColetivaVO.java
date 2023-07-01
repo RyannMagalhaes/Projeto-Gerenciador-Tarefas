@@ -5,25 +5,21 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> implements Serializable {
 
     private Long cod_tarefa_col;
     private String nome;
-
     private String descricao;
-
     private String categoria;
-
     private boolean status;
-
     private Date data_inicio;
-
     private Date data_fim;
+    private int prioridade;
+    private List<Long> idsParticipantes;
 
-    private int prioriadade;
-
-    public TarefaColetivaVO(Long cod_tarefa_col, String nome, String descricao, String categoria, boolean status, Date data_inicio, Date data_fim, int prioriadade) {
+    public TarefaColetivaVO(Long cod_tarefa_col, String nome, String descricao, String categoria, boolean status, Date data_inicio, Date data_fim, int prioridade, List<Long> idsParticipantes) {
         this.cod_tarefa_col = cod_tarefa_col;
         this.nome = nome;
         this.descricao = descricao;
@@ -31,7 +27,8 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
         this.status = status;
         this.data_inicio = data_inicio;
         this.data_fim = data_fim;
-        this.prioriadade = prioriadade;
+        this.prioridade = prioridade;
+        this.idsParticipantes = idsParticipantes;
     }
 
     public TarefaColetivaVO() {
@@ -93,12 +90,20 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
         this.data_fim = data_fim;
     }
 
-    public int getPrioriadade() {
-        return prioriadade;
+    public int getPrioridade() {
+        return prioridade;
     }
 
-    public void setPrioriadade(int prioriadade) {
-        this.prioriadade = prioriadade;
+    public void setPrioridade(int prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public List<Long> getIdsParticipantes() {
+        return idsParticipantes;
+    }
+
+    public void setIdsParticipantes(List<Long> idsParticipantes) {
+        this.idsParticipantes = idsParticipantes;
     }
 
     @Override
@@ -109,7 +114,7 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
         TarefaColetivaVO that = (TarefaColetivaVO) o;
 
         if (status != that.status) return false;
-        if (prioriadade != that.prioriadade) return false;
+        if (prioridade != that.prioridade) return false;
         if (!cod_tarefa_col.equals(that.cod_tarefa_col)) return false;
         if (!descricao.equals(that.descricao)) return false;
         if (!categoria.equals(that.categoria)) return false;
@@ -125,7 +130,7 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
         result = 31 * result + (status ? 1 : 0);
         result = 31 * result + data_inicio.hashCode();
         result = 31 * result + data_fim.hashCode();
-        result = 31 * result + prioriadade;
+        result = 31 * result + prioridade;
         return result;
     }
 
@@ -138,7 +143,9 @@ public class TarefaColetivaVO extends RepresentationModel<TarefaColetivaVO> impl
                 ", status=" + status +
                 ", data_inicio=" + data_inicio +
                 ", data_fim=" + data_fim +
-                ", prioriadade=" + prioriadade +
+                ", prioridade=" + prioridade +
                 '}';
     }
+
+
 }
