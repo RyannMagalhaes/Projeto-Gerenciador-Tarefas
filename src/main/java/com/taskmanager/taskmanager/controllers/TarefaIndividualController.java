@@ -66,7 +66,7 @@ public class TarefaIndividualController {
         return service.findAll();
     }
 
-    @PostMapping(consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
+    @PostMapping(name = "{/save}",consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
             produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(
             summary = "Save tarefa individual.", description = "Creates a individual task", tags = {"TarefaIndividual"},
@@ -93,7 +93,7 @@ public class TarefaIndividualController {
         }
     }
 
-    @PutMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML },
+    @PutMapping(name="{/update}",produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML },
             consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })
     @Operation(
             summary = "Update Tarefa Individual.", description = "Updates a individual task", tags = {"TarefaIndividual"},
@@ -149,7 +149,7 @@ public class TarefaIndividualController {
         }
     }
 
-    @GetMapping("/filtro")
+    @GetMapping("/filtro-individual")
     @Operation(
             summary = "Find Tarefa Individual by Status and Category", description = "Finds Individual Tasks by they status and/or category", tags = {"TarefaIndividual"},
             responses = {
@@ -164,7 +164,7 @@ public class TarefaIndividualController {
         return service.findByStatusAndCategoria(status, categoria);
     }
 
-    @GetMapping("/filtro-por-nome")
+    @GetMapping("/filtro-por-nome-individual")
     @Operation(
             summary = "Find Tarefa Individual by Nome", description = "Finds Individual Tasks by their name", tags = {"TarefaIndividual"},
             responses = {
@@ -180,46 +180,3 @@ public class TarefaIndividualController {
     }
 }
 
-
-// Para testar
-// {
-//  "cod_tarefa_ind": 0,
-//  "descricao": "trabalho camillo",
-//  "categoria": "faculdade",
-//  "status": false,
-//  "data_inicio": "2022-02-04T00:20:04.717Z",
-//  "data_fim": "2024-06-28T00:20:04.717Z",
-//  "prioriadade": 2,
-//  "_links": {
-//    "additionalProp1": {
-//      "href": "string",
-//      "hreflang": "string",
-//      "title": "string",
-//      "type": "string",
-//      "deprecation": "string",
-//      "profile": "string",
-//      "name": "string",
-//      "templated": true
-//    },
-//    "additionalProp2": {
-//      "href": "string",
-//      "hreflang": "string",
-//      "title": "string",
-//      "type": "string",
-//      "deprecation": "string",
-//      "profile": "string",
-//      "name": "string",
-//      "templated": true
-//    },
-//    "additionalProp3": {
-//      "href": "string",
-//      "hreflang": "string",
-//      "title": "string",
-//      "type": "string",
-//      "deprecation": "string",
-//      "profile": "string",
-//      "name": "string",
-//      "templated": true
-//    }
-//  }
-//}

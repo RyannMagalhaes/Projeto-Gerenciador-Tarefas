@@ -64,7 +64,7 @@ public class UsuarioController {
         return service.findAll();
     }
 
-    @PostMapping(consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
+    @PostMapping(name = "{/save}",consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
             produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(
             summary = "Create a user.", description = "Create a user.", tags = {"Usuario"},
@@ -91,7 +91,7 @@ public class UsuarioController {
         }
         }
 
-    @PutMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML },
+    @PutMapping(name = "/update" ,produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML },
             consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })
     @Operation(
             summary = "Update a user.", description = "Update a user.", tags = {"Usuario"},

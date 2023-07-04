@@ -107,7 +107,7 @@ public class TarefaColetivaController {
 
     @PutMapping("/{id}/concluir")
     @Operation(
-            summary = "Marcar Tarefa Coletiva Como Concluída", description = "Define a individual task as completed", tags = {"TarefaIndividual"},
+            summary = "Marcar Tarefa Coletiva Como Concluída", description = "Define a individual task as completed", tags = {"TarefaColetiva"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
@@ -119,16 +119,16 @@ public class TarefaColetivaController {
     public ResponseEntity<String> marcarComoConcluida(@PathVariable("id") Long id) throws ResourceNotFoundException {
         try {
             service.marcarComoConcluida(id);
-            return ResponseEntity.ok("Tarefa individual concluída com sucesso.");
+            return ResponseEntity.ok("Tarefa Coletiva concluída com sucesso.");
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
 
 
-    @GetMapping("/filtro")
+    @GetMapping("/filtro-coletiva")
     @Operation(
-            summary = "Find Tarefa Coletiva by Status and Category", description = "Finds Group Tasks by they status and/or category", tags = {"TarefaIndividual"},
+            summary = "Find Tarefa Coletiva by Status and Category", description = "Finds Group Tasks by they status and/or category", tags = {"TarefaColetiva"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
@@ -141,9 +141,9 @@ public class TarefaColetivaController {
         return service.findByStatusAndCategoria(status, categoria);
     }
 
-    @GetMapping("/filtro-por-nome")
+    @GetMapping("/filtro-por-nome-coletiva")
     @Operation(
-            summary = "Find Tarefa Coletiva by Nome", description = "Finds Group Tasks by their name", tags = {"TarefaIndividual"},
+            summary = "Find Tarefa Coletiva by Nome", description = "Finds Group Tasks by their name", tags = {"TarefaColetiva"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
