@@ -128,8 +128,8 @@ public class TarefaIndividualController {
         return service.delete(id);
     }
 
-    @PutMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML },
-            consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })
+
+    @PutMapping("/{id}/concluir")
     @Operation(
             summary = "marcar tarefa individual como concluída", description = "Define a individual task as completed", tags = {"TarefaIndividual"},
             responses = {

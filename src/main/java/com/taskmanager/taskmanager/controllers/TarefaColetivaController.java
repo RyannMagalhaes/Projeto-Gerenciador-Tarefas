@@ -3,6 +3,7 @@ package com.taskmanager.taskmanager.controllers;
 import com.taskmanager.taskmanager.data.vo.TarefaColetivaVO;
 import com.taskmanager.taskmanager.data.vo.TarefaIndividualVO;
 import com.taskmanager.taskmanager.exceptions.RequiredObjectIsNullException;
+import com.taskmanager.taskmanager.exceptions.ResourceNotFoundException;
 import com.taskmanager.taskmanager.services.TarefaColetivaService;
 import com.taskmanager.taskmanager.utils.MediaType;
 import io.swagger.v3.oas.annotations.Operation;
@@ -102,5 +103,56 @@ public class TarefaColetivaController {
     )
     public String delete(@PathVariable("id") Long id) {
         return service.delete(id);
+    }
+
+    @PutMapping("/{id}/concluir")
+    @Operation(
+            summary = "Marcar Tarefa Coletiva Como Concluída", description = "Define a individual task as completed", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
+    public ResponseEntity<String> marcarComoConcluida(@PathVariable("id") Long id) throws ResourceNotFoundException {
+        try {
+            service.marcarComoConcluida(id);
+            return ResponseEntity.ok("Tarefa individual concluída com sucesso.");
+        } catch (ResourceNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+    }
+
+
+    @GetMapping("/filtro")
+    @Operation(
+            summary = "Find Tarefa Coletiva by Status and Category", description = "Finds Group Tasks by they status and/or category", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<TarefaColetivaVO> findByStatusAndCategoria(@RequestParam("status") boolean status, @RequestParam("categoria") String categoria) {
+        return service.findByStatusAndCategoria(status, categoria);
+    }
+
+    @GetMapping("/filtro-por-nome")
+    @Operation(
+            summary = "Find Tarefa Coletiva by Nome", description = "Finds Group Tasks by their name", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<TarefaColetivaVO> findByNome(@RequestParam("nome") String nome) {
+        return service.findByNome(nome);
     }
 }

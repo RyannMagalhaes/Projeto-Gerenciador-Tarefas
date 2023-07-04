@@ -21,9 +21,5 @@ public class TaskmanagerApplication {
 
 	}
 
-	@GetMapping
-	public String helloWorld(){
-		return "Olá mundo, teste!";
-	}
 }
 // http://localhost:8080/swagger-ui/index.html#/Usuario/findById endpoint para swagger

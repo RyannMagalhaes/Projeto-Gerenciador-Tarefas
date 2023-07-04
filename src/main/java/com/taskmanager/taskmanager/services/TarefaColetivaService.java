@@ -2,10 +2,12 @@ package com.taskmanager.taskmanager.services;
 
 import com.taskmanager.taskmanager.controllers.TarefaColetivaController;
 import com.taskmanager.taskmanager.data.vo.TarefaColetivaVO;
+import com.taskmanager.taskmanager.data.vo.TarefaIndividualVO;
 import com.taskmanager.taskmanager.exceptions.RequiredObjectIsNullException;
 import com.taskmanager.taskmanager.exceptions.ResourceNotFoundException;
 import com.taskmanager.taskmanager.mapper.DozerMapper;
 import com.taskmanager.taskmanager.models.TarefaColetiva;
+import com.taskmanager.taskmanager.models.TarefaIndividual;
 import com.taskmanager.taskmanager.repositories.TarefaColetivaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,5 +69,22 @@ public class TarefaColetivaService {
 
     public boolean verificarIdExistente(Long id) {
         return repository.existsById(id);
+    }
+
+    public void marcarComoConcluida(Long id) throws ResourceNotFoundException {
+        TarefaColetiva tarefaColetiva = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TarefaIndividual not found for id: " + id));
+
+        tarefaColetiva.setStatus(true);
+        repository.save(tarefaColetiva);
+    }
+
+    public List<TarefaColetivaVO> findByStatusAndCategoria(boolean status, String categoria) {
+        List<TarefaColetiva> tarefas = repository.findByStatusAndCategoria(status, categoria);
+        return DozerMapper.parseListObject(tarefas, TarefaColetivaVO.class);
+    }
+    public List<TarefaColetivaVO> findByNome(String nome) {
+        List<TarefaColetiva> tarefas = repository.findByNome(nome);
+        return DozerMapper.parseListObject(tarefas, TarefaColetivaVO.class);
     }
 }
