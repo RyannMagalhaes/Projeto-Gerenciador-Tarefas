@@ -29,11 +29,39 @@ public class TarefaIndividualController {
     private TarefaIndividualService service;
 
     @GetMapping("/{id}")
+    @Operation(
+            summary = "Find by Id", description = "Finds a individual task by ID", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "Success", responseCode = "200",
+                            content = @Content(
+                                    schema = @Schema(implementation = UsuarioVO.class)
+                            )
+                    ),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public TarefaIndividualVO findById(@PathVariable("id") Long id) throws Exception {
         return service.findById(id);
     }
 
     @GetMapping("/findAll")
+    @Operation(
+            summary = "FindAll", description = "Returns all individual tasks", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "Success", responseCode = "200",
+                            content = @Content(
+                                    schema = @Schema(implementation = UsuarioVO.class)
+                            )
+                    ),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public List<TarefaIndividualVO> findAll(){
         return service.findAll();
     }
@@ -41,7 +69,7 @@ public class TarefaIndividualController {
     @PostMapping(consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
             produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     @Operation(
-            summary = "Create a Tarefa Individual.", description = "Create a Tarefa Individual.", tags = {"TarefaIndividual"},
+            summary = "Save tarefa individual.", description = "Creates a individual task", tags = {"TarefaIndividual"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200",
                             content = @Content(
@@ -68,7 +96,7 @@ public class TarefaIndividualController {
     @PutMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML },
             consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })
     @Operation(
-            summary = "Update a Tarefa Individual.", description = "Update a Tarefa Individual.", tags = {"TarefaIndividual"},
+            summary = "Update Tarefa Individual.", description = "Updates a individual task", tags = {"TarefaIndividual"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200",
                             content = @Content(
@@ -87,7 +115,7 @@ public class TarefaIndividualController {
 
     @DeleteMapping("/{id}")
     @Operation(
-            summary = "Deletes a Tarefa Individual by ID.", description = "Deletes a Tarefa individual by ID.", tags = {"TarefaIndividual"},
+            summary = "Delete individual task", description = "Deletes a individual task by its ID.", tags = {"TarefaIndividual"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
@@ -100,7 +128,18 @@ public class TarefaIndividualController {
         return service.delete(id);
     }
 
-    @PutMapping("/{id}/concluir")
+    @PutMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML },
+            consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })
+    @Operation(
+            summary = "marcar tarefa individual como concluída", description = "Define a individual task as completed", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public ResponseEntity<String> marcarComoConcluida(@PathVariable("id") Long id) throws ResourceNotFoundException {
         try {
             service.marcarComoConcluida(id);
@@ -111,11 +150,31 @@ public class TarefaIndividualController {
     }
 
     @GetMapping("/filtro")
+    @Operation(
+            summary = "Find Tarefa Individual by Status and Category", description = "Finds Individual Tasks by they status and/or category", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public List<TarefaIndividualVO> findByStatusAndCategoria(@RequestParam("status") boolean status, @RequestParam("categoria") String categoria) {
         return service.findByStatusAndCategoria(status, categoria);
     }
 
     @GetMapping("/filtro-por-nome")
+    @Operation(
+            summary = "Find Tarefa Individual by Nome", description = "Finds Individual Tasks by their name", tags = {"TarefaIndividual"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public List<TarefaIndividualVO> findByNome(@RequestParam("nome") String nome) {
         return service.findByNome(nome);
     }

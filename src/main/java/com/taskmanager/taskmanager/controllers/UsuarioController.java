@@ -25,12 +25,41 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
+
     @GetMapping("/{id}")
+    @Operation(
+            summary = "Find a user", description = "Find a user by it's id", tags = {"Usuario"},
+    responses = {
+        @ApiResponse(description = "Success", responseCode = "200",
+                content = @Content(
+                        schema = @Schema(implementation = UsuarioVO.class)
+                )
+        ),
+        @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+        @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+        @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+        @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+    }
+    )
     public UsuarioVO  findById(@PathVariable("id") Long id) throws Exception {
         return service.findById(id);
     }
 
     @GetMapping("/findAll")
+    @Operation(
+            summary = "Find All", description = "Returns all Users", tags = {"Usuario"},
+            responses = {
+                    @ApiResponse(description = "Success", responseCode = "200",
+                            content = @Content(
+                                    schema = @Schema(implementation = UsuarioVO.class)
+                            )
+                    ),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
     public List<UsuarioVO> findAll(){
         return service.findAll();
     }
